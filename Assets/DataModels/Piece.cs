@@ -1,4 +1,6 @@
-﻿namespace Assets.DataModels
+﻿using Assets.DataModels.Type;
+
+namespace Assets.DataModels
 {
     public class Piece
     {

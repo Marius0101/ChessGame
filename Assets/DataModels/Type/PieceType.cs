@@ -1,4 +1,4 @@
-﻿namespace Assets.DataModels
+﻿namespace Assets.DataModels.Type
 {
     public enum PieceType
     {

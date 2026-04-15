@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ public class PieceMoving : MonoBehaviour
 {
     private bool isDragging;
     private Vector3 offset;
+    private Vector3 originalPosition;
 
     void Update()
     {
@@ -19,23 +21,26 @@ public class PieceMoving : MonoBehaviour
         {
             Collider2D hit = Physics2D.OverlapPoint(mouseWorld);
 
-            if (hit.GetComponent<Collider2D>() != null && hit.transform == transform)
+            if (hit != null && hit.transform == transform)
             {
                 isDragging = true;
+                originalPosition = transform.position;
                 offset = transform.position - mouseWorld;
             }
         }
-
-        if (Mouse.current.leftButton.isPressed && isDragging)
+        if (isDragging)
         {
-            transform.position = mouseWorld + offset;
-        }
+            if (Mouse.current.leftButton.isPressed)
+            {
+                transform.position = mouseWorld + offset;
+            }
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            isDragging = false;
-            DropPiece();
-        }
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                isDragging = false;
+                DropPiece();
+            }
+        } 
     }
     void DropPiece()
     {
