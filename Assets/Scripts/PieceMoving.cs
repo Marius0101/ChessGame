@@ -17,23 +17,31 @@ public class PieceMoving : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorld, Vector2.zero);
+            Collider2D hit = Physics2D.OverlapPoint(mouseWorld);
 
-            if (hit.collider != null && hit.transform == transform)
+            if (hit.GetComponent<Collider2D>() != null && hit.transform == transform)
             {
                 isDragging = true;
-                offset = transform.position - (Vector3)mouseWorld;
+                offset = transform.position - mouseWorld;
             }
         }
 
         if (Mouse.current.leftButton.isPressed && isDragging)
         {
-            transform.position = (Vector3)mouseWorld + offset;
+            transform.position = mouseWorld + offset;
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             isDragging = false;
+            DropPiece();
         }
+    }
+    void DropPiece()
+    {
+        int x = Mathf.RoundToInt(transform.position.x);
+        int y = Mathf.RoundToInt(transform.position.y);
+        Vector3 snapPosition = new Vector3(x, y, transform.position.z);
+        transform.position = snapPosition;
     }
 }
