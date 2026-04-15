@@ -282,6 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4837304920243849849}
+  - component: {fileID: 5166986692715064379}
   m_Layer: 0
   m_Name: King
   m_TagString: Untagged
@@ -307,3 +308,15 @@ Transform:
   - {fileID: 6335579229780689035}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5166986692715064379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566179799517191500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eab3f40bb07d72409821fcd680590e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PieceMoving
