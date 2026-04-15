@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7461457907032838087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3267407379026848119}
+  - component: {fileID: 2812874414576563121}
+  m_Layer: 0
+  m_Name: SpawnBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3267407379026848119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461457907032838087}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.856, y: 6.23353, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2812874414576563121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461457907032838087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de0378e012e2544a8a4d38a35491c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoardSpawning
+  squarePrefab: {fileID: 8588686860120426702, guid: 849bfc4cd483d114fa5d5bb41d3adaef, type: 3}
+  pawnPrefab: {fileID: 6962870894559810124, guid: 4bf53cd721f2f4842aeebf0439c704f2, type: 3}
+  bishopPrefab: {fileID: 6257276407355217374, guid: f1e7928e082045e4caa44ebee3b510b6, type: 3}
+  knightPrefab: {fileID: 5652396863298041832, guid: 3ee56f80d77847942a41655c3d20fff6, type: 3}
+  rookPrefab: {fileID: 7583747755865113441, guid: dfb7cc0237d0614468424bd2704b2a6b, type: 3}
+  queenPrefab: {fileID: 3924272543716320604, guid: 9941b5e8ea692f1438ce2e6c848ffea9, type: 3}
+  kingPrefab: {fileID: 7566179799517191500, guid: ee92e067bce123244a7e41da9bed7fc4, type: 3}
+  numberOfSquares: 8
