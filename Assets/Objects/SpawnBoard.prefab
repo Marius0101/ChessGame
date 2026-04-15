@@ -47,4 +47,8 @@ MonoBehaviour:
   squarePrefab: {fileID: 8588686860120426702, guid: 849bfc4cd483d114fa5d5bb41d3adaef, type: 3}
   pawnPrefab: {fileID: 6962870894559810124, guid: 4bf53cd721f2f4842aeebf0439c704f2, type: 3}
   bishopPrefab: {fileID: 6257276407355217374, guid: f1e7928e082045e4caa44ebee3b510b6, type: 3}
+  knightPrefab: {fileID: 5652396863298041832, guid: 3ee56f80d77847942a41655c3d20fff6, type: 3}
+  rookPrefab: {fileID: 7583747755865113441, guid: dfb7cc0237d0614468424bd2704b2a6b, type: 3}
+  queenPrefab: {fileID: 3924272543716320604, guid: 9941b5e8ea692f1438ce2e6c848ffea9, type: 3}
+  kingPrefab: {fileID: 7566179799517191500, guid: ee92e067bce123244a7e41da9bed7fc4, type: 3}
   numberOfSquares: 8
