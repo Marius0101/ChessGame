@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         if(result.CapturedPiece != null)
             Destroy(result.CapturedPiece.VisualObject);
         piece.ChangePosition(newPosition);
+
+        //Just for testing, will be removed later
         string originalSquareName = SquareData.GetSqaureName(originalPosition.x, originalPosition.y);
         string newSquareName = SquareData.GetSqaureName(newPosition.x, newPosition.y);
         Debug.Log($"Moved piece from {originalSquareName} to {newSquareName}");

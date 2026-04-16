@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -48,10 +46,10 @@ public class PieceMoving : MonoBehaviour
         int x = Mathf.RoundToInt(transform.position.x);
         int y = Mathf.RoundToInt(transform.position.y);
 
-        Vector2Int newPosition = new(x,y);
+        Vector2Int newPosition = new(y,x);
         GameManager.Instance.MovePiece(originalPosition, newPosition, this);
     }
-    public void ResetPosition() => transform.position = new Vector3(originalPosition.x, originalPosition.y, transform.position.z);
-    public void ChangePosition(Vector2Int newPostion) => transform.position = new Vector3(newPostion.x, newPostion.y, transform.position.z);
-    private Vector2Int GetVector2IntPosition(Vector3 position) => new Vector2Int(Mathf.RoundToInt(position.x),Mathf.RoundToInt(position.y));
+    public void ResetPosition() => transform.position = new Vector3(originalPosition.y, originalPosition.x, transform.position.z);
+    public void ChangePosition(Vector2Int newPostion) => transform.position = new Vector3(newPostion.y, newPostion.x, transform.position.z);
+    private Vector2Int GetVector2IntPosition(Vector3 position) => new Vector2Int(Mathf.RoundToInt(position.y),Mathf.RoundToInt(position.x));
 }

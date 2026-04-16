@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Assets.DataModels
@@ -22,6 +21,8 @@ namespace Assets.DataModels
 
         private bool IsValidMove(Vector2Int from, Vector2Int to)
         {
+            var piece = board[from.x, from.y].Piece;
+            Debug.Log($"Piece at original position: {piece?.Type.ToString() ?? "None"}");
             return true;
         }
 

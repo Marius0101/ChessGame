@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.SqlTypes;
-using Assets.DataModels;
+﻿using Assets.DataModels;
 using Assets.DataModels.Type;
 using UnityEngine;
 
@@ -19,7 +17,6 @@ public class BoardSpawning : MonoBehaviour
 
     public BoardState Initialize(int size, BoardSpawnType boardSpawnType)
     {
-
         CreateBoardVisual(size);
         BoardState boardState = SpawnPieces(size,boardSpawnType);
         return boardState;
