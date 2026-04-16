@@ -21,6 +21,9 @@ namespace Assets.DataModels
 
         private bool IsValidMove(Vector2Int originalPostion, Vector2Int newPostion)
         {
+            //TODO: get availbele moves for the piece and check if the new position is in that list
+            // Make sublacks depending of the piece type, for example for a pawn it can only move forward, for a knight it can move in L shape, etc.
+
             var piece = board[originalPostion.x, originalPostion.y].Piece;
             var targetPiece = board[newPostion.x, newPostion.y].Piece;
             if(targetPiece != null && targetPiece.Color == piece?.Color)
