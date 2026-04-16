@@ -1,11 +1,10 @@
 ﻿using Assets.DataModels;
-using System;
+using Assets.DataModels.Type;
 using UnityEngine;
-using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class BoardSpawning : MonoBehaviour
 {
+    #region Prefab
     public GameObject squarePrefab;
     public GameObject pawnPrefab;
     public GameObject bishopPrefab;
@@ -13,34 +12,38 @@ public class BoardSpawning : MonoBehaviour
     public GameObject rookPrefab;
     public GameObject queenPrefab;
     public GameObject kingPrefab;
-    public int numberOfSquares = 8;
-    private SquareData[,] board;
+    #endregion
     private GameObject[,] visualSquares;
-    void Start()
+
+    public BoardState Initialize(int size, BoardSpawnType boardSpawnType)
     {
-        InitializeBoard();
-        visualSquares = new GameObject[numberOfSquares, numberOfSquares];
-        for (int i = 0; i < numberOfSquares; i++)
-        {
-            for(int j = 0; j < numberOfSquares; j++)
-            {
-                board[i, j] = new SquareData();
-                Vector3 position = new Vector3(i, j, 0);
-                
-                GameObject square = Instantiate(squarePrefab, position, Quaternion.identity);
-                visualSquares[i, j] = square;
-                Renderer renderer = square.GetComponent<Renderer>();
-                if ((i + j) % 2 == 0)
-                    renderer.material.color = Color.white;
-                else
-                    renderer.material.color = Color.black;
-            }
-        }
-        SpawnTestPieces();
+        CreateBoardVisual(size);
+        BoardState boardState = SpawnPieces(size,boardSpawnType);
+        return boardState;
     }
 
-    private void SpawnTestPieces()
+    private BoardState SpawnPieces(int size ,BoardSpawnType boardSpawnType)
     {
+        BoardState boardState = new BoardState(size);
+        if(boardSpawnType == BoardSpawnType.None)
+            return boardState;
+        if(boardSpawnType == BoardSpawnType.Startup)
+            boardState = CreateStartupPosition(boardState);
+            return boardState;
+    }
+
+    private BoardState CreateStartupPosition(BoardState boardState)
+    {
+        //TODO: Add pieces to initial position
+        //Temporary just set some tests pieces
+        SpawnTestPieces(boardState);
+        return boardState;
+    }
+
+    private void SpawnTestPieces(BoardState boardState)
+    {
+        SquareData[,] board = boardState.board;
+        int numberOfSquares = boardState.Size;
         board[0, 0].Piece = new Piece(PieceType.Rook, ColorType.White);
         board[1, 0].Piece = new Piece(PieceType.Pawn, ColorType.White);
         board[0, 1].Piece = new Piece(PieceType.Knight, ColorType.White);
@@ -57,15 +60,15 @@ public class BoardSpawning : MonoBehaviour
 
         for(int i =0 ; i < numberOfSquares; i++)
         {
-            UpdateVisualAt(0, i);
-            UpdateVisualAt(1, i);
-            UpdateVisualAt(6, i);
-            UpdateVisualAt(7, i);
+            UpdateVisualAt(board,0, i);
+            UpdateVisualAt(board, 1, i);
+            UpdateVisualAt(board, 6, i);
+            UpdateVisualAt(board, 7, i);
         }
 
     }
 
-    private void UpdateVisualAt(int row, int column)
+    private void UpdateVisualAt(SquareData[,] board, int row, int column)
     {
         Piece piece = board[row, column].Piece;
         if (piece == null || piece.Type == PieceType.None)
@@ -98,6 +101,7 @@ public class BoardSpawning : MonoBehaviour
             Vector3 position = new Vector3(column, row, -2);
             GameObject  newPiece= Instantiate(prefabToSpawn, position, Quaternion.identity);
             ApplyColor(newPiece, piece.Color);
+            board[row, column].Piece.VisualObject = newPiece; 
         }
     }
 
@@ -113,15 +117,22 @@ public class BoardSpawning : MonoBehaviour
         }
     }
 
-    void InitializeBoard()
+    void CreateBoardVisual(int numberOfSquares)
     {
-        board = new SquareData[numberOfSquares, numberOfSquares];
+        visualSquares = new GameObject[numberOfSquares, numberOfSquares];
 
         for (int i = 0; i < numberOfSquares; i++)
         {
             for (int j = 0; j < numberOfSquares; j++)
             {
-                board[i, j] = new SquareData();
+                Vector3 position = new Vector3(i, j, 0);
+                GameObject square = Instantiate(squarePrefab, position, Quaternion.identity);
+                visualSquares[i, j] = square;
+                Renderer renderer = square.GetComponent<Renderer>();
+                if ((i + j) % 2 == 0)
+                    renderer.material.color = Color.white;
+                else
+                    renderer.material.color = Color.black;
             }
         }
     }

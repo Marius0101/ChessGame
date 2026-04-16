@@ -6,6 +6,7 @@ public class PieceMoving : MonoBehaviour
 {
     private bool isDragging;
     private Vector3 offset;
+    private Vector2Int originalPosition;
 
     void Update()
     {
@@ -19,29 +20,36 @@ public class PieceMoving : MonoBehaviour
         {
             Collider2D hit = Physics2D.OverlapPoint(mouseWorld);
 
-            if (hit.GetComponent<Collider2D>() != null && hit.transform == transform)
+            if (hit != null && hit.transform == transform)
             {
                 isDragging = true;
+                originalPosition = GetVector2IntPosition(transform.position);
                 offset = transform.position - mouseWorld;
             }
         }
-
-        if (Mouse.current.leftButton.isPressed && isDragging)
+        if (isDragging)
         {
-            transform.position = mouseWorld + offset;
-        }
+            if (Mouse.current.leftButton.isPressed)
+            {
+                transform.position = mouseWorld + offset;
+            }
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            isDragging = false;
-            DropPiece();
-        }
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                isDragging = false;
+                DropPiece();
+            }
+        } 
     }
     void DropPiece()
     {
         int x = Mathf.RoundToInt(transform.position.x);
         int y = Mathf.RoundToInt(transform.position.y);
-        Vector3 snapPosition = new Vector3(x, y, transform.position.z);
-        transform.position = snapPosition;
+
+        Vector2Int newPosition = new(y,x);
+        GameManager.Instance.MovePiece(originalPosition, newPosition, this);
     }
+    public void ResetPosition() => transform.position = new Vector3(originalPosition.y, originalPosition.x, transform.position.z);
+    public void ChangePosition(Vector2Int newPostion) => transform.position = new Vector3(newPostion.y, newPostion.x, transform.position.z);
+    private Vector2Int GetVector2IntPosition(Vector3 position) => new Vector2Int(Mathf.RoundToInt(position.y),Mathf.RoundToInt(position.x));
 }
