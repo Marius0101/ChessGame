@@ -19,9 +19,15 @@ namespace Assets.DataModels
             }
         }
 
-        private bool IsValidMove(Vector2Int from, Vector2Int to)
+        private bool IsValidMove(Vector2Int originalPostion, Vector2Int newPostion)
         {
-            var piece = board[from.x, from.y].Piece;
+            var piece = board[originalPostion.x, originalPostion.y].Piece;
+            var targetPiece = board[newPostion.x, newPostion.y].Piece;
+            if(targetPiece != null && targetPiece.Color == piece?.Color)
+            {
+                Debug.Log("Invalid move: Cannot capture your own piece.");
+                return false;
+            }
             Debug.Log($"Piece at original position: {piece?.Type.ToString() ?? "None"}");
             return true;
         }
