@@ -34,10 +34,21 @@ namespace Assets.DataModels
 
         public MoveResult UpdateState(Vector2Int originalPostion, Vector2Int newPostion)
         {
+            if(!IsValidMove(originalPostion, newPostion))
+            {
+                return new MoveResult
+                {
+                    Success = false,
+                    CapturedPiece = null
+                };
+            }
+            Piece capturedPiece = board[newPostion.x, newPostion.y].Piece;
+            board[newPostion.x, newPostion.y].Piece = board[originalPostion.x, originalPostion.y].Piece;
+            board[originalPostion.x, originalPostion.y].Piece = null;
             return new MoveResult
             {
                 Success = IsValidMove(originalPostion, newPostion),
-                CapturedPiece = board[newPostion.x, newPostion.y].Piece
+                CapturedPiece = capturedPiece
             };
         }
     }
