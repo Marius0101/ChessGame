@@ -25,6 +25,7 @@ namespace Assets.DataModels
             Type = pieceType;
             Color = colorType;
             VisualObject = null;
+            MoveStrategy = CreateStrategy(Type);
         }
         private IMoveStrategy CreateStrategy(PieceType type)
         {
@@ -35,7 +36,8 @@ namespace Assets.DataModels
                 case PieceType.None: 
                     return null;
                 default:
-                    throw new ArgumentException($"No move strategy defined for piece type: {type}");
+                    return null;
+                    //throw new ArgumentException($"No move strategy defined for piece type: {type}");
             }
         }
     }

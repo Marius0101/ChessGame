@@ -5,6 +5,6 @@ namespace Assets.DataModels.Type
 {
     public interface IMoveStrategy
     {
-        List<Vector2Int> GetAvailableMoves(Vector2Int position, BoardState board);
+        List<Vector2Int> GetAvailableMoves(Vector2Int position, SquareData[,] board);
     }
 }

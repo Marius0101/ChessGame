@@ -21,17 +21,19 @@ namespace Assets.DataModels
 
         private bool IsValidMove(Vector2Int originalPostion, Vector2Int newPostion)
         {
-            //TODO: get availbele moves for the piece and check if the new position is in that list
-            // Make sublacks depending of the piece type, for example for a pawn it can only move forward, for a knight it can move in L shape, etc.
-
             var piece = board[originalPostion.x, originalPostion.y].Piece;
-            var targetPiece = board[newPostion.x, newPostion.y].Piece;
-            if(targetPiece != null && targetPiece.Color == piece?.Color)
+            if(piece == null)
             {
-                Debug.Log("Invalid move: Cannot capture your own piece.");
+                Debug.Log("Invalid move: No piece at the original position.");
                 return false;
             }
-            Debug.Log($"Piece at original position: {piece?.Type.ToString() ?? "None"}");
+            var availableMoves = piece.MoveStrategy.GetAvailableMoves(originalPostion, board);
+            if (!availableMoves.Contains(newPostion))
+            {
+                Debug.Log("Invalid move: Position is not in the list of available moves.");
+                return false;
+            }
+            Debug.Log("Valid move: Position is in the list of available moves.");
             return true;
         }
 
@@ -50,7 +52,7 @@ namespace Assets.DataModels
             board[originalPostion.x, originalPostion.y].Piece = null;
             return new MoveResult
             {
-                Success = IsValidMove(originalPostion, newPostion),
+                Success = true,
                 CapturedPiece = capturedPiece
             };
         }
