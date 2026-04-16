@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 namespace Assets.DataModels
 {
     public class BoardState
@@ -16,5 +19,21 @@ namespace Assets.DataModels
                 }
             }
         }
+
+        private bool IsValidMove(Vector2Int from, Vector2Int to)
+        {
+            return true;
+        }
+
+        public MoveResult UpdateState(Vector2Int originalPostion, Vector2Int newPostion)
+        {
+            return new MoveResult
+            {
+                Success = IsValidMove(originalPostion, newPostion),
+                CapturedPiece = board[newPostion.x, newPostion.y].Piece
+            };
+        }
     }
+
+
 }

@@ -17,25 +17,30 @@ public class BoardSpawning : MonoBehaviour
     #endregion
     private GameObject[,] visualSquares;
 
-    public void Initialize(BoardState boardState, BoardSpawnType boardSpawnType)
+    public BoardState Initialize(int size, BoardSpawnType boardSpawnType)
     {
-        CreateBoardVisual(boardState.Size);
-        SpawnPieces(boardState,boardSpawnType);
+
+        CreateBoardVisual(size);
+        BoardState boardState = SpawnPieces(size,boardSpawnType);
+        return boardState;
     }
 
-    private void SpawnPieces(BoardState boardState ,BoardSpawnType boardSpawnType)
+    private BoardState SpawnPieces(int size ,BoardSpawnType boardSpawnType)
     {
+        BoardState boardState = new BoardState(size);
         if(boardSpawnType == BoardSpawnType.None)
-            return;
+            return boardState;
         if(boardSpawnType == BoardSpawnType.Startup)
-            CreateStartupPosition(boardState);
+            boardState = CreateStartupPosition(boardState);
+            return boardState;
     }
 
-    private void CreateStartupPosition(BoardState boardState)
+    private BoardState CreateStartupPosition(BoardState boardState)
     {
         //TODO: Add pieces to initial position
         //Temporary just set some tests pieces
         SpawnTestPieces(boardState);
+        return boardState;
     }
 
     private void SpawnTestPieces(BoardState boardState)
@@ -99,6 +104,7 @@ public class BoardSpawning : MonoBehaviour
             Vector3 position = new Vector3(column, row, -2);
             GameObject  newPiece= Instantiate(prefabToSpawn, position, Quaternion.identity);
             ApplyColor(newPiece, piece.Color);
+            board[row, column].Piece.VisualObject = newPiece; 
         }
     }
 

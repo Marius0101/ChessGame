@@ -8,7 +8,7 @@
             Piece = null;
         }
 
-        string GetSqaureName(int rowCoordinates, int columnCoordinates)
+        public static string GetSqaureName(int rowCoordinates, int columnCoordinates)
         {
             char column = (char)('a' + columnCoordinates);
             int row = rowCoordinates + 1;
