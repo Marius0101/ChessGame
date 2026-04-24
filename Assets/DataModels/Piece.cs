@@ -33,11 +33,18 @@ namespace Assets.DataModels
             {
                 case PieceType.Pawn: 
                     return new PawnMoveStrategy();
-                case PieceType.None: 
-                    return null;
+                case PieceType.Knight:
+                    return new KnightMoveStrategy();
+                case PieceType.Bishop:
+                    return new BishopMoveStrategy();
+                case PieceType.Rook:
+                    return new RookMoveStrategy();
+                case PieceType.Queen:
+                    return new QueenMoveStrategy();
+                case PieceType.King:
+                    return new KingMoveStrategy();
                 default:
-                    return null;
-                    //throw new ArgumentException($"No move strategy defined for piece type: {type}");
+                    throw new ArgumentException($"No move strategy defined for piece type: {type}");
             }
         }
     }
