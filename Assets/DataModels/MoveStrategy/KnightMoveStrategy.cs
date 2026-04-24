@@ -12,26 +12,11 @@ namespace Assets.DataModels.Type
             if (piece == null || piece.Type != PieceType.Knight)
                 return availableMoves;
             
-            Vector2Int leftTop1 = new Vector2Int(position.x+1, position.y-2);
-            TryAddMove(leftTop1, board, availableMoves, piece);
-            Vector2Int leftTop2 = new Vector2Int(position.x+2, position.y-1);
-            TryAddMove(leftTop2, board, availableMoves, piece);
-
-            Vector2Int rightTop1 = new Vector2Int(position.x+1, position.y+2);
-            TryAddMove(rightTop1, board, availableMoves, piece);
-            Vector2Int rightTop2 = new Vector2Int(position.x+2, position.y+1);
-            TryAddMove(rightTop2, board, availableMoves, piece);
-
-            Vector2Int leftBottom1 = new Vector2Int(position.x-1, position.y-2);
-            TryAddMove(leftBottom1, board, availableMoves, piece);
-            Vector2Int leftBottom2 = new Vector2Int(position.x-2, position.y-1);
-            TryAddMove(leftBottom2, board, availableMoves, piece);
-
-            Vector2Int rightBottom1 = new Vector2Int(position.x-1, position.y+2);
-            TryAddMove(rightBottom1, board, availableMoves, piece);
-            Vector2Int rightBottom2 = new Vector2Int(position.x-2, position.y+1);
-            TryAddMove(rightBottom2, board, availableMoves, piece);
-
+            foreach (var move in LocationToCheck())
+            {
+                Vector2Int newPosition = position + move;
+                TryAddMove(newPosition, board, availableMoves, piece);
+            }
             return availableMoves;
         }
 
@@ -52,6 +37,34 @@ namespace Assets.DataModels.Type
         {
             return position.x >= 0 && position.x < board.GetLength(0) &&
                      position.y >= 0 && position.y < board.GetLength(1);
+        }
+
+        internal bool KnightExist(Vector2Int position, SquareData[,] board, ColorType color)
+        {
+            foreach (var move in LocationToCheck())
+            {
+                Vector2Int knightPosition = position + move;
+                if (!IsInsideBoard(knightPosition, board))
+                    continue;
+                Piece piece = board[knightPosition.x, knightPosition.y].Piece;
+                if (piece != null && piece.Type == PieceType.Knight && piece.Color != color)
+                    return true;
+            }
+            return false;
+        }
+        private static List<Vector2Int> LocationToCheck()
+        {
+            return new List<Vector2Int>
+            {
+                new Vector2Int(1, 2),
+                new Vector2Int(2, 1),
+                new Vector2Int(1, -2),
+                new Vector2Int(2, -1),
+                new Vector2Int(-1, 2),
+                new Vector2Int(-2, 1),
+                new Vector2Int(-1, -2),
+                new Vector2Int(-2, -1)
+            };
         }
     }
 }
