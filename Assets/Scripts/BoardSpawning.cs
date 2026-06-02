@@ -1,4 +1,5 @@
-﻿using Assets.DataModels;
+﻿using System.Collections.Generic;
+using Assets.DataModels;
 using Assets.DataModels.Type;
 using UnityEngine;
 
@@ -34,40 +35,32 @@ public class BoardSpawning : MonoBehaviour
 
     private BoardState CreateStartupPosition(BoardState boardState)
     {
-        //TODO: Add pieces to initial position
-        //Temporary just set some tests pieces
-        SpawnTestPieces(boardState);
+        SquareData[,] board = boardState.board;
+        for (int i = 0; i < boardState.Size; i++)
+        {
+            board[0, i].Piece = new Piece(BackRank[i], ColorType.White);
+            UpdateVisualAt(board,0, i);
+            board[7, i].Piece = new Piece(BackRank[i], ColorType.Black);
+            UpdateVisualAt(board, 7, i);
+
+            board[1, i].Piece = new Piece(PieceType.Pawn, ColorType.White);
+            UpdateVisualAt(board, 1, i);
+            board[6, i].Piece = new Piece(PieceType.Pawn, ColorType.Black);
+            UpdateVisualAt(board, 6, i);
+        }
         return boardState;
     }
-
-    private void SpawnTestPieces(BoardState boardState)
+    private static readonly PieceType[] BackRank =
     {
-        SquareData[,] board = boardState.board;
-        int numberOfSquares = boardState.Size;
-        board[0, 0].Piece = new Piece(PieceType.Rook, ColorType.White);
-        board[1, 0].Piece = new Piece(PieceType.Pawn, ColorType.White);
-        board[0, 1].Piece = new Piece(PieceType.Knight, ColorType.White);
-        board[0, 3].Piece = new Piece(PieceType.Queen, ColorType.White);
-        board[0, 2].Piece = new Piece(PieceType.Bishop, ColorType.White);
-        board[0, 4].Piece = new Piece(PieceType.King, ColorType.White);
-
-        board[7, 0].Piece = new Piece(PieceType.Rook, ColorType.Black);
-        board[6, 0].Piece = new Piece(PieceType.Pawn, ColorType.Black);
-        board[7, 1].Piece = new Piece(PieceType.Knight, ColorType.Black);
-        board[7, 3].Piece = new Piece(PieceType.Queen, ColorType.Black);
-        board[7, 2].Piece = new Piece(PieceType.Bishop, ColorType.Black);
-        board[7, 4].Piece = new Piece(PieceType.King, ColorType.Black);
-
-        for(int i =0 ; i < numberOfSquares; i++)
-        {
-            UpdateVisualAt(board,0, i);
-            UpdateVisualAt(board, 1, i);
-            UpdateVisualAt(board, 6, i);
-            UpdateVisualAt(board, 7, i);
-        }
-
-    }
-
+        PieceType.Rook,
+        PieceType.Knight,
+        PieceType.Bishop,
+        PieceType.Queen,
+        PieceType.King,
+        PieceType.Bishop,
+        PieceType.Knight,
+        PieceType.Rook
+    };
     private void UpdateVisualAt(SquareData[,] board, int row, int column)
     {
         Piece piece = board[row, column].Piece;
@@ -99,7 +92,7 @@ public class BoardSpawning : MonoBehaviour
         if (prefabToSpawn != null)
         {
             Vector3 position = new Vector3(column, row, -2);
-            GameObject  newPiece= Instantiate(prefabToSpawn, position, Quaternion.identity);
+            GameObject newPiece= Instantiate(prefabToSpawn, position, Quaternion.identity);
             ApplyColor(newPiece, piece.Color);
             board[row, column].Piece.VisualObject = newPiece; 
         }
