@@ -6,6 +6,7 @@ namespace Assets.DataModels
     {
         public SquareData[,] board;
         public int Size => board.GetLength(0);
+        private bool whiteTurn;
         public BoardState(int size)
         {
             board = new SquareData[size, size];
@@ -17,6 +18,7 @@ namespace Assets.DataModels
                     board[i, j] = new SquareData();
                 }
             }
+            whiteTurn = true;
         }
 
         private bool IsValidMove(Vector2Int originalPostion, Vector2Int newPostion)
@@ -27,6 +29,12 @@ namespace Assets.DataModels
                 Debug.Log("Invalid move: No piece at the original position.");
                 return false;
             }
+            if (!isPlayerTurn(piece))
+            {
+                Debug.Log("Invalid move: It's not the player's turn.");
+                return false;
+            }
+            
             var availableMoves = piece.MoveStrategy.GetAvailableMoves(originalPostion, board);
             if (!availableMoves.Contains(newPostion))
             {
@@ -34,9 +42,16 @@ namespace Assets.DataModels
                 return false;
             }
             Debug.Log("Valid move: Position is in the list of available moves.");
+            whiteTurn = !whiteTurn;
             return true;
         }
 
+        public bool isPlayerTurn(Piece piece)
+        {
+            if (piece.IsWhite())
+                return whiteTurn;
+            return !whiteTurn;
+        }
         public MoveResult UpdateState(Vector2Int originalPostion, Vector2Int newPostion)
         {
             if(!IsValidMove(originalPostion, newPostion))

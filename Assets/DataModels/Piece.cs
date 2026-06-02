@@ -27,6 +27,10 @@ namespace Assets.DataModels
             VisualObject = null;
             MoveStrategy = CreateStrategy(Type);
         }
+        public bool IsWhite()
+        {
+            return Color == ColorType.White;
+        }
         private IMoveStrategy CreateStrategy(PieceType type)
         {
             switch (type)
