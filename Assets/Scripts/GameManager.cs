@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public void MovePiece(Vector2Int originalPosition ,Vector2Int newPosition, PieceMoving piece)
     {
         var result = state.UpdateState(originalPosition,newPosition);
-        if (!result.Success)
+        if (!result.IsSuccess)
         {
             piece.ResetPosition();
             return;

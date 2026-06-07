@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Assets.DataModels.Type;
 using NUnit.Framework;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Assets.DataModels
     public class BoardState
     {
         public SquareData[,] board;
+        public List<MoveHistory> moveHistory;
         public int Size => board.GetLength(0);
         private bool whiteTurn;
         private KingMoveStrategy kingMoveStrategy = new KingMoveStrategy();
@@ -23,6 +25,7 @@ namespace Assets.DataModels
                 }
             }
             whiteTurn = true;
+            moveHistory = new List<MoveHistory>();
         }
 
         private bool IsValidMove(Vector2Int originalPostion, Vector2Int newPostion)
@@ -58,21 +61,16 @@ namespace Assets.DataModels
         public MoveResult UpdateState(Vector2Int originalPostion, Vector2Int newPostion)
         {
             if(!IsValidMove(originalPostion, newPostion))
-            {
-                return new MoveResult
-                {
-                    Success = false,
-                    CapturedPiece = null
-                };
-            }
+                return new MoveResult(isSuccess: false, capturedPiece: null);
+                
+            Piece originalPiece = board[originalPostion.x, originalPostion.y].Piece;
             Piece capturedPiece = board[newPostion.x, newPostion.y].Piece;
-            board[newPostion.x, newPostion.y].Piece = board[originalPostion.x, originalPostion.y].Piece;
+            MoveHistory move = new(originalPostion, newPostion, originalPiece, capturedPiece);
+            moveHistory.Add(move);
+
+            board[newPostion.x, newPostion.y].Piece = originalPiece;
             board[originalPostion.x, originalPostion.y].Piece = null;
-            return new MoveResult
-            {
-                Success = true,
-                CapturedPiece = capturedPiece
-            };
+            return new MoveResult(isSuccess: true, capturedPiece);
         }
         private bool IsKingInCheck(ColorType color,Vector2Int originalPosition, Vector2Int newPosition, Piece piece)
         {

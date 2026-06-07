@@ -2,7 +2,13 @@ namespace Assets.DataModels
 {
     public class MoveResult
     {
-        public bool Success {get;set;}
+        public bool IsSuccess {get;set;}
         public Piece CapturedPiece {get;set;}
+
+        public MoveResult(bool isSuccess, Piece capturedPiece)
+        {
+            IsSuccess = isSuccess;
+            CapturedPiece = capturedPiece;
+        }
     }
 }
