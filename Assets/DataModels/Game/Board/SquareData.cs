@@ -1,4 +1,6 @@
-﻿namespace Assets.DataModels
+﻿using Assets.DataModels.Game.Board;
+
+namespace Assets.DataModels.Game.Board
 {
     public class SquareData
     {

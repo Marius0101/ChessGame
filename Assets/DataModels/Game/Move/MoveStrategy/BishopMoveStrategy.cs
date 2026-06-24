@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.DataModels.Game.Type;
+using Assets.DataModels.Game.Board;
 
-namespace Assets.DataModels.Type
+namespace Assets.DataModels.Game.Move.MoveStrategy
 {
     public class BishopMoveStrategy : IMoveStrategy
     {

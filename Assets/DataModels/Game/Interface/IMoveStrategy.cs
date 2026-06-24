@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Assets.DataModels.Game.Board;
 using UnityEngine;
 
-namespace Assets.DataModels.Type
+namespace Assets.DataModels.Game.Move.MoveStrategy
 {
     public interface IMoveStrategy
     {

@@ -1,8 +1,9 @@
 ﻿using System;
-using Assets.DataModels.Type;
+using Assets.DataModels.Game.Move.MoveStrategy;
+using Assets.DataModels.Game.Type;
 using UnityEngine;
 
-namespace Assets.DataModels
+namespace Assets.DataModels.Game.Board
 {
     public class Piece
     {
