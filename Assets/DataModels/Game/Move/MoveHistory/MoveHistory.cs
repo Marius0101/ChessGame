@@ -1,6 +1,7 @@
 using UnityEngine;
+using Assets.DataModels.Game.Board;
 
-namespace Assets.DataModels
+namespace Assets.DataModels.Game.Move.MoveHistory
 {
     public class MoveHistory
     {

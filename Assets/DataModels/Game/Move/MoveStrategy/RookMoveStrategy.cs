@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Assets.DataModels.Game.Type;
 using UnityEngine;
 
-namespace Assets.DataModels.Type
+namespace Assets.DataModels.Game.Move.MoveStrategy
 {
     public class RookMoveStrategy : IMoveStrategy
     {

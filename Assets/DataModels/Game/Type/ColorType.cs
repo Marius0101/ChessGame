@@ -1,4 +1,4 @@
-﻿namespace Assets.DataModels.Type
+﻿namespace Assets.DataModels.Game.Type
 {
     public enum ColorType
     {

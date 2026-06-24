@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Assets.DataModels.Type;
-using NUnit.Framework;
+using Assets.DataModels.Game.Move.MoveHistory;
+using Assets.DataModels.Game.Move.MoveStrategy;
+using Assets.DataModels.Game.Type;
 using UnityEngine;
 
-namespace Assets.DataModels
+namespace Assets.DataModels.Game.Board
 {
     public class BoardState
     {
