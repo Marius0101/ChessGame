@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.DataModels.Game.Board;
 using Assets.DataModels.Game.Type;
 using UnityEngine;
 

@@ -1,5 +1,4 @@
-using Assets.DataModels.Game.Piece;
-
+using Assets.DataModels.Game.Board;
 namespace Assets.DataModels
 {
     public class MoveResult

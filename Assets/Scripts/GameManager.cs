@@ -1,6 +1,6 @@
 using System.Linq;
-using Assets.DataModels;
-using Assets.DataModels.Type;
+using Assets.DataModels.Game.Board;
+using Assets.DataModels.Game.Type;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public BoardSpawning boardView;
     public BoardState state;
     
-    public HistoryView historyView;
+    // public HistoryView historyView;
     void Start()
     {
         state = boardView.Initialize(numberOfSquares, BoardSpawnType.Startup);

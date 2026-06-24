@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Assets.DataModels;
-using Assets.DataModels.Type;
+﻿using Assets.DataModels.Game.Board;
+using Assets.DataModels.Game.Type;
 using UnityEngine;
 
 public class BoardSpawning : MonoBehaviour

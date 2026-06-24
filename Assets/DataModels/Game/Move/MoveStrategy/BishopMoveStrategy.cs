@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.DataModels.Game.Type;
+using Assets.DataModels.Game.Board;
 
 namespace Assets.DataModels.Game.Move.MoveStrategy
 {
